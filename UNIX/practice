@@ -1,0 +1,19 @@
+05/03/2026
+cd [directory] : moves from one directory to another directory
+mkdir [foldername] : creates folder with the given foldername
+touch [filename1.extention, filename2.extention] : creates file/files of corresponding extention
+ls :list files in current directory
+ls -l : displays long format( owner, size, date, time, files, permissions)
+ls -a : shows the hidden files
+ls -lh : shows human readable files(like text files)
+ls -r: shows files in reverse order
+ls -t: sorts files based on the modification time
+pwd - displays the current directory path
+cd .. : the path will change from the current path to one step back(for example from home/mobaxterm/desktop/tharnika ---->home/mobaxterm/desktop)
+cd / : the path will change to the root directory
+cd ~ : the path will change to the home directory
+cd - : the path will be changed to the previous directory
+mkdir -p [dir1/dir2] : it will create a directory inside a directory
+rmdir -p [dir1/dir2] : it will remove the directory which has directory inside
+mkdir -v [foldername] : it will create a folder with the given foldername and shows the message "mkdir: created directory 'folder1' "
+rmdir foldername] : it will remove a folder having the given foldername
