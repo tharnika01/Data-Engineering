@@ -1,4 +1,4 @@
-05/03/2026
+06/03/2026
 cd [directory] : moves from one directory to another directory
 mkdir [foldername] : creates folder with the given foldername
 touch [filename1.extention, filename2.extention] : creates file/files of corresponding extention
@@ -17,3 +17,65 @@ mkdir -p [dir1/dir2] : it will create a directory inside a directory
 rmdir -p [dir1/dir2] : it will remove the directory which has directory inside
 mkdir -v [foldername] : it will create a folder with the given foldername and shows the message "mkdir: created directory 'folder1' "
 rmdir foldername] : it will remove a folder having the given foldername
+07/03/2026
+cp -r [sourcedir1] [destinationdir2] : copies source to destination
+cp -i file1 file2 : copies file1 to file 2, but asks for confirmation before overwriting
+cp -v file1 file2 : Copies file1 to file2 and displays the copying process.
+moves or renames
+mv file1 dir/ - moves file to directory
+mv oldname newname : renames the file
+mv -i file1 dir/ : confirm before overwriting the file. if y/no
+mv -v file1 dir/ : prints a message showing the move operation.
+remove
+rem file.txt : deletes the file
+rm -r folder : deletes directory and all files/subdirectories inside it.
+rm -f file : forces the deletion of file
+rm -i file : ask for permission before deleting
+
+stat 
+gives information about the file's size, permissions, owner, access time, modification time
+
+find
+find . -name [file.txt] : search the file by its name and it gives the file path . it will search in its own directory
+find /home -type f : searches only files from the starting directory
+find . -size +10M : finds the files more than 10mb
+find . -mtime -1 : finds the files which are modified within a day
+cat
+cat f1.txt f2.txt > combined.txt :combines both txt file content to the new file
+cat -e file.txt > : print each newline with $
+cat -t filename : print content in file and but prints tab as ^
+cat -u file name: copy one byte at a time
+cat -v filename:  Display nonprinting characters as escape sequences with M-x for high ascii characters (>127), and ^x for other nonprinting chars
+
+less
+less filename :lets us scroll through the large file
+while scrolling 
+space : next page
+b : previous page
+/[text we want to search in large file]:searches the given text
+q : means quitting from the page
+less -N filename : shows line numbers for each line in the file
+less -S filename :long lines do not continue on the next line and must be viewed by horizontal scrolling.
+  Right arrow : to see the hidden part of the hidden part
+	left arrow: to go back
+
+more
+more filename : view file one screen at a time
+
+head
+head filename: show first lines of a file
+head -n [Number][filename]: gives the first N number of lines
+head -c [bytes][filename]: gives the specific bytes of characters
+
+tail filename :show end lines of a file
+tail -n [Number][filename]: gives the last N number of lines
+tail -c [bytes][filename]: gives the specific bytes of characters from last
+
+vim filename : it helps to edit the text in the file in mobaxterm
+	after entering the editor 
+	i : for insert mode
+		esc-->:wq--> to save and exit the editor
+		q! : exit without saving
+		dd: for deleting line
+		yy: for copying the line 
+		p : for pasting
