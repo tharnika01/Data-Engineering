@@ -79,3 +79,72 @@ vim filename : it helps to edit the text in the file in mobaxterm
 		dd: for deleting line
 		yy: for copying the line 
 		p : for pasting
+
+grep(global regular expression print)
+grep "hello" bigdata.txt - Used to search for a word or pattern inside a file
+grep -c "hello" bigdata.txt : gives the count of lines having the given text
+grep -n "hello" bigdata.txt : shows line number which has the given text
+grep -v "hello" bigdata.txt : Shows all lines except hello
+grep -i "HelLo WorlD" bigdata.txt : ignores case sensitive and gives the lines have the text
+
+sed
+sed 's/old/new/' filename : replace old word to new word. one word in one line
+   sed 's/old/new/g' filename : make changes entirely in every line even if contains same old word
+  sed -i 's/old/new/g' filename : save the changes after changing the old word to new
+   sed -n 5,10p filename : gives those lines in between 5 and 10 and p = print
+   sed '3d' filename : deletes only line number 3
+   sed '2,10d' filename : deletes lines from 2 to 10
+   sed '/hello/d' bigdata.txt : Deletes lines containing hello
+   sed '/hi/i\hello' bigdata.txt : adds hello in line before hi word in file
+   sed '/hi/a\hello' bigdata.txt : adds hello after line of hi
+   sed 's/emp/employee/g' bigdata.txt > output.txt : Output goes to output.txt,If output.txt already exists it is overwritten
+   sed 's/emp/employee/g' bigdata.txt >> output.txt : It does NOT erase existing content, It adds new output at bottom
+
+nl - adds the number to every line in file
+
+
+awk '{print $2}' filename : prints the 2nd col in the file
+awk '{print $1,$2}' filename = prints the 1st and 2nd col in the file
+awk '{print NR}' filename = prints row number in the file
+awk '{print $NF}' filename = prints the last column in the file
+
+cut -d ','-f1 filename : it gives the 1st bcz we gave f1 of comma
+cut -c [number] : it cuts and prints the 1st letter of every line of file
+
+
+sort -n filename : Sorts numbers numerically
+sort -r filename : Reverse order
+sort -k filename : Sort by column (-k1 means 1st column)
+sort -u filename : Unique values
+sort -f filename : Ignore case and sorts in alphabetical order Like apple,Apple
+sort -M filename : Sorts month names
+sort -t ',' -k1 filename : sets comma as delimiter and -k1 means sorts using columns
+
+uniq -c filename: counts the occurrence of the word or num
+uniq -d filename : diplays the duplicate values only
+sort filename | uniq = removes duplicates
+
+
+wc -l = Count lines
+wc -w = Count words
+wc -c = Count bytes of the file
+wc -m = Count characters
+
+cat filename | tr 'a-z' 'A-Z' :converts the text from lower to upper case
+cat filename | tr -d 'a' : delete "a" alphabet from the file
+cat filename | tr ' ' ',' : replace spaces with commas
+
+< – Input Redirection : Takes input for a command from a file instead of keyboard
+    wc -l < filename = Counts lines in filename using input redirection of file to wc command
+
+| – Pipe  :Sends output of one command as input to another command 
+    cat snow.txt | grep "IT" = Filters lines containing "IT"
+
+2> – Redirect Errors : Redirects error messages (stderr) to a file
+     ls wrongfile 2> error.txt = Saves error message into error.txt
+
+& – Run in Background :Runs a command in the background without blocking the terminal
+    sleep 10 & = Runs sleep command in background
+
+
+
