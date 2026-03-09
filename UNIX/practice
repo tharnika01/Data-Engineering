@@ -17,6 +17,8 @@ mkdir -p [dir1/dir2] : it will create a directory inside a directory
 rmdir -p [dir1/dir2] : it will remove the directory which has directory inside
 mkdir -v [foldername] : it will create a folder with the given foldername and shows the message "mkdir: created directory 'folder1' "
 rmdir foldername] : it will remove a folder having the given foldername
+
+
 07/03/2026
 cp -r [sourcedir1] [destinationdir2] : copies source to destination
 cp -i file1 file2 : copies file1 to file 2, but asks for confirmation before overwriting
@@ -102,7 +104,7 @@ sed 's/old/new/' filename : replace old word to new word. one word in one line
 
 nl - adds the number to every line in file
 
-
+08/03/2026
 awk '{print $2}' filename : prints the 2nd col in the file
 awk '{print $1,$2}' filename = prints the 1st and 2nd col in the file
 awk '{print NR}' filename = prints row number in the file
@@ -146,5 +148,44 @@ cat filename | tr ' ' ',' : replace spaces with commas
 & – Run in Background :Runs a command in the background without blocking the terminal
     sleep 10 & = Runs sleep command in background
 
+chmod - used to change file or directory permissions
+      [r-Read-4]
+      [w-Write-2]
+      [x-Execute-1]
+      [- file]
+    1) Symbolic way- chmod [who][operator][permission] file
+         Who	Meaning
+         u	   User      rw-(can read and write,cannot execute)
+         g	   Group     ---(cannot read,write,execute)
+         o	   Others    r--(can read,cannot write,cannot execute)
+         a	   All
+         Operators:
+         +	 Add permission
+         -	 Remove permission
+         =   Set exact permission
+         [chmod u+x snow.txt = -rwx---r--]  
+         [chmod u-w filename = -r-x---r--]
+   2) Numeric way - chmod XYZ file
+         X = User
+         Y = Group
+         Z = Others
+     [chmod 755 filename = rwxr-xr-x]
+      7 = 4+2+1 = rwx
+      5 = 4+0+1 = r-x
+      5 = 4+0+1 = r-x
+chmod 755 hlo.txt:  gives permission based on number system
+Owner → rwx (7)
+Group → r-x (5)
+Others → r-x (5)
+chmod g-w file.txt : remove write permission to group
+chmod -r 755 folder/ : recursive permission change
+chgown owner filename: to change the owner of the file
+chgown owner:group filename: to change owner and grp of the file
+chgown -r name folder/ : change the owner of the given folder and its inside files
+
+chgrp group filename: to change the group of the file
+chgrp -r name folder/ : change the group of the given folder and its inside files
+
+unmask : Defines the default permissions for newly created files and directories.
 
 
