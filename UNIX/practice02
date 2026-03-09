@@ -1,0 +1,168 @@
+06/03/2026
+cp -r [sourcedir1] [destinationdir2] : copies source to destination
+cp -i file1 file2 : copies file1 to file 2, but asks for confirmation before overwriting
+cp -v file1 file2 : Copies file1 to file2 and displays the copying process.
+moves or renames
+mv file1 dir/ - moves file to directory
+mv oldname newname : renames the file
+mv -i file1 dir/ : confirm before overwriting the file. if y/no
+mv -v file1 dir/ : prints a message showing the move operation.
+remove
+rem file.txt : deletes the file
+rm -r folder : deletes directory and all files/subdirectories inside it.
+rm -f file : forces the deletion of file
+rm -i file : ask for permission before deleting
+
+stat 
+gives information about the file's size, permissions, owner, access time, modification time
+
+find
+find . -name [file.txt] : search the file by its name and it gives the file path . it will search in its own directory
+find /home -type f : searches only files from the starting directory
+find . -size +10M : finds the files more than 10mb
+find . -mtime -1 : finds the files which are modified within a day
+cat
+cat f1.txt f2.txt > combined.txt :combines both txt file content to the new file
+cat -e file.txt > : print each newline with $
+cat -t filename : print content in file and but prints tab as ^
+cat -u file name: copy one byte at a time
+cat -v filename:  Display nonprinting characters as escape sequences with M-x for high ascii characters (>127), and ^x for other nonprinting chars
+
+less
+less filename :lets us scroll through the large file
+while scrolling 
+space : next page
+b : previous page
+/[text we want to search in large file]:searches the given text
+q : means quitting from the page
+less -N filename : shows line numbers for each line in the file
+less -S filename :long lines do not continue on the next line and must be viewed by horizontal scrolling.
+  Right arrow : to see the hidden part of the hidden part
+	left arrow: to go back
+
+more
+more filename : view file one screen at a time
+
+head
+head filename: show first lines of a file
+head -n [Number][filename]: gives the first N number of lines
+head -c [bytes][filename]: gives the specific bytes of characters
+
+tail filename :show end lines of a file
+tail -n [Number][filename]: gives the last N number of lines
+tail -c [bytes][filename]: gives the specific bytes of characters from last
+
+vim filename : it helps to edit the text in the file in mobaxterm
+	after entering the editor 
+	i : for insert mode
+		esc-->:wq--> to save and exit the editor
+		q! : exit without saving
+		dd: for deleting line
+		yy: for copying the line 
+		p : for pasting
+
+grep(global regular expression print)
+grep "hello" bigdata.txt - Used to search for a word or pattern inside a file
+grep -c "hello" bigdata.txt : gives the count of lines having the given text
+grep -n "hello" bigdata.txt : shows line number which has the given text
+grep -v "hello" bigdata.txt : Shows all lines except hello
+grep -i "HelLo WorlD" bigdata.txt : ignores case sensitive and gives the lines have the text
+
+sed
+sed 's/old/new/' filename : replace old word to new word. one word in one line
+   sed 's/old/new/g' filename : make changes entirely in every line even if contains same old word
+  sed -i 's/old/new/g' filename : save the changes after changing the old word to new
+   sed -n 5,10p filename : gives those lines in between 5 and 10 and p = print
+   sed '3d' filename : deletes only line number 3
+   sed '2,10d' filename : deletes lines from 2 to 10
+   sed '/hello/d' bigdata.txt : Deletes lines containing hello
+   sed '/hi/i\hello' bigdata.txt : adds hello in line before hi word in file
+   sed '/hi/a\hello' bigdata.txt : adds hello after line of hi
+   sed 's/emp/employee/g' bigdata.txt > output.txt : Output goes to output.txt,If output.txt already exists it is overwritten
+   sed 's/emp/employee/g' bigdata.txt >> output.txt : It does NOT erase existing content, It adds new output at bottom
+
+nl - adds the number to every line in file
+
+
+awk '{print $2}' filename : prints the 2nd col in the file
+awk '{print $1,$2}' filename = prints the 1st and 2nd col in the file
+awk '{print NR}' filename = prints row number in the file
+awk '{print $NF}' filename = prints the last column in the file
+
+cut -d ','-f1 filename : it gives the 1st bcz we gave f1 of comma
+cut -c [number] : it cuts and prints the 1st letter of every line of file
+
+
+sort -n filename : Sorts numbers numerically
+sort -r filename : Reverse order
+sort -k filename : Sort by column (-k1 means 1st column)
+sort -u filename : Unique values
+sort -f filename : Ignore case and sorts in alphabetical order Like apple,Apple
+sort -M filename : Sorts month names
+sort -t ',' -k1 filename : sets comma as delimiter and -k1 means sorts using columns
+
+uniq -c filename: counts the occurrence of the word or num
+uniq -d filename : diplays the duplicate values only
+sort filename | uniq = removes duplicates
+
+
+wc -l = Count lines
+wc -w = Count words
+wc -c = Count bytes of the file
+wc -m = Count characters
+
+cat filename | tr 'a-z' 'A-Z' :converts the text from lower to upper case
+cat filename | tr -d 'a' : delete "a" alphabet from the file
+cat filename | tr ' ' ',' : replace spaces with commas
+
+< – Input Redirection : Takes input for a command from a file instead of keyboard
+    wc -l < filename = Counts lines in filename using input redirection of file to wc command
+
+| – Pipe  :Sends output of one command as input to another command 
+    cat snow.txt | grep "IT" = Filters lines containing "IT"
+
+2> – Redirect Errors : Redirects error messages (stderr) to a file
+     ls wrongfile 2> error.txt = Saves error message into error.txt
+
+& – Run in Background :Runs a command in the background without blocking the terminal
+    sleep 10 & = Runs sleep command in background
+
+chmod - used to change file or directory permissions
+      [r-Read-4]
+      [w-Write-2]
+      [x-Execute-1]
+      [- file]
+    1) Symbolic way- chmod [who][operator][permission] file
+         Who	Meaning
+         u	   User      rw-(can read and write,cannot execute)
+         g	   Group     ---(cannot read,write,execute)
+         o	   Others    r--(can read,cannot write,cannot execute)
+         a	   All
+         Operators:
+         +	 Add permission
+         -	 Remove permission
+         =   Set exact permission
+         [chmod u+x snow.txt = -rwx---r--]  
+         [chmod u-w filename = -r-x---r--]
+   2) Numeric way - chmod XYZ file
+         X = User
+         Y = Group
+         Z = Others
+     [chmod 755 filename = rwxr-xr-x]
+      7 = 4+2+1 = rwx
+      5 = 4+0+1 = r-x
+      5 = 4+0+1 = r-x
+chmod 755 hlo.txt:  gives permission based on number system
+Owner → rwx (7)
+Group → r-x (5)
+Others → r-x (5)
+chmod g-w file.txt : remove write permission to group
+chmod -r 755 folder/ : recursive permission change
+chgown owner filename: to change the owner of the file
+chgown owner:group filename: to change owner and grp of the file
+chgown -r name folder/ : change the owner of the given folder and its inside files
+
+chgrp group filename: to change the group of the file
+chgrp -r name folder/ : change the group of the given folder and its inside files
+
+unmask : Defines the default permissions for newly created files and directories.
