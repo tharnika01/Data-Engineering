@@ -1,4 +1,4 @@
-06/03/2026
+05/03/2026
 cd [directory] : moves from one directory to another directory
 mkdir [foldername] : creates folder with the given foldername
 touch [filename1.extention, filename2.extention] : creates file/files of corresponding extention
@@ -19,7 +19,7 @@ mkdir -v [foldername] : it will create a folder with the given foldername and sh
 rmdir foldername] : it will remove a folder having the given foldername
 
 
-07/03/2026
+06/03/2026
 cp -r [sourcedir1] [destinationdir2] : copies source to destination
 cp -i file1 file2 : copies file1 to file 2, but asks for confirmation before overwriting
 cp -v file1 file2 : Copies file1 to file2 and displays the copying process.
@@ -104,7 +104,7 @@ sed 's/old/new/' filename : replace old word to new word. one word in one line
 
 nl - adds the number to every line in file
 
-08/03/2026
+
 awk '{print $2}' filename : prints the 2nd col in the file
 awk '{print $1,$2}' filename = prints the 1st and 2nd col in the file
 awk '{print NR}' filename = prints row number in the file
@@ -187,5 +187,6 @@ chgrp group filename: to change the group of the file
 chgrp -r name folder/ : change the group of the given folder and its inside files
 
 unmask : Defines the default permissions for newly created files and directories.
+
 
 
