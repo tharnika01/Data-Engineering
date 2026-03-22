@@ -1,0 +1,89 @@
+What is function?
+-A function is a reusable database object that returns a single value based on input parameters.
+-It is mainly used for calculations, transformations, or deriving values.
+
+SYNTAX:
+CREATE OR REPLACE FUNCTION function_name (param datatype)
+RETURNS datatype
+AS
+$$
+    expression
+$$;
+
+TO USE FUNCTION:
+SELECT function_name (param); 
+
+What is procedure
+-A stored procedure is a database object that executes a set of SQL statements to perform operations like INSERT, UPDATE, DELETE, MERGE, etc.
+-It may or may not return a value.
+
+SYNTAX:
+CREATE OR REPLACE PROCEDURE procedure_name ()
+RETURNS STRING
+LANGUAGE SQL
+AS
+$$
+BEGIN
+    -- SQL statements
+    RETURN 'SUCCESS';
+END;
+$$;
+
+TO CALL PREOCEDURE:
+CALL   procedure_name();
+
+Difference between procedure and function?
+-A function must always return a value, whereas a procedure may or may not return a value.
+-A function is usually used inside a SELECT statement, but a procedure is executed using the CALL statement.
+-A function is mainly used for calculations or deriving values, while a procedure is used to perform operations like INSERT, UPDATE, DELETE, or MERGE.
+-In most cases, functions do not allow DML operations (like INSERT or UPDATE), whereas procedures are specifically designed to handle such operations.
+-Functions are generally simple and focus on a single task, while procedures can contain complex logic, multiple steps, and control flow (loops, conditions, etc.).
+-A function is typically lightweight and faster for small computations, whereas a procedure is heavier and used for full data processing workflows (like ETL)
+
+Procedure with arguments and without arguments .
+-A procedure with arguments accepts input values, whereas a procedure without arguments does not take any input.
+-In a procedure with arguments, the logic can change based on the values passed, but in a procedure without arguments, the logic is fixed and runs the same way every time.
+-A procedure with arguments is more flexible and reusable, while a procedure without arguments is simpler and used for fixed tasks.
+-In a procedure with arguments, you can pass values like CUSTOMER_ID, CITY, or DATE, but in a procedure without arguments, everything must be hardcoded or internally calculated.
+-A procedure with arguments is commonly used when filtering or dynamic processing is required, whereas a procedure without arguments is used for general tasks like full data load or batch processing.
+
+CODE:
+
+-PROCEDURE WITHOUT PARAMETERS:This procedure processes all records from STG_ORDERS and loads them into FACT_ORDERS.
+
+CREATE OR REPLACE PROCEDURE LOAD_ALL_ORDERS()
+RETURNS STRING
+LANGUAGE SQL
+AS
+$$
+BEGIN
+
+    INSERT INTO FACT_ORDERS (ORDER_ID, CUSTOMER_ID, ORDER_DATE, AMOUNT)
+    SELECT ORDER_ID, CUSTOMER_ID, ORDER_DATE, AMOUNT
+    FROM STG_ORDERS;
+
+    RETURN 'ALL ORDERS LOADED SUCCESSFULLY';
+
+END;
+$$;
+CALL  LOAD_ALL_ORDERS();
+
+PROCEDURE WITHOUT ARGUMENTS:his procedure loads orders only for a specific customer from STG_ORDERS into FACT_ORDERS.
+
+CREATE OR REPLACE PROCEDURE LOAD_ORDERS_BY_CUSTOMER(P_CUSTOMER_ID INT)
+RETURNS STRING
+LANGUAGE SQL
+AS
+$$
+BEGIN
+
+    INSERT INTO FACT_ORDERS (ORDER_ID, CUSTOMER_ID, ORDER_DATE, AMOUNT)
+    SELECT ORDER_ID, CUSTOMER_ID, ORDER_DATE, AMOUNT
+    FROM STG_ORDERS
+    WHERE CUSTOMER_ID = P_CUSTOMER_ID;
+
+    RETURN 'ORDERS LOADED FOR CUSTOMER: ' || P_CUSTOMER_ID;
+
+END;
+$$;
+CALL LOAD_ORDERS_BY_CUSTOMER(101);
